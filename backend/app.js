@@ -19,35 +19,34 @@ const allowedOrigins = (process.env.CORS_ORIGINS || "")
 
 // Add localhost origins for development if no origins specified
 const developmentOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:5173',
-  'http://127.0.0.1:3000'
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:3000",
 ];
+const productionOrigins = ["https://aivrasol.netlify.app"];
 
-const allAllowedOrigins = allowedOrigins.length > 0 
-  ? allowedOrigins 
-  : developmentOrigins;
+const allAllowedOrigins = [...developmentOrigins, ...productionOrigins];
 
 const corsOptions = {
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps, Postman, curl)
     if (!origin) return callback(null, true);
-    
+
     if (allAllowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    
+
     return callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/aiva', aivaRouter);
+app.use("/aiva", aivaRouter);
 
 // ✅ connect once when server starts
 connectDb();
@@ -71,9 +70,7 @@ app.get("/", (req, res) => res.send("Server Started"));
 
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
-  res
-    .status(500)
-    .json({ success: false, message: "Internal Server Error" });
+  res.status(500).json({ success: false, message: "Internal Server Error" });
 });
 
 export default app;
