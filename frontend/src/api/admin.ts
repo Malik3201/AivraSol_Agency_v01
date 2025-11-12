@@ -1,7 +1,6 @@
 import { apiGet, apiPost, apiDelete, apiPut } from './http'
 import { z } from 'zod'
 import {
-  ServiceDtoSchema,
   ProjectDtoSchema,
   CategoryDtoSchema,
   KnowledgeDtoSchema,
