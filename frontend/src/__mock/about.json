@@ -1,0 +1,30 @@
+{
+  "story": [
+    { "title": "Origins", "copy": "Started by senior engineers shipping fast MVPs.", "year": "2022" },
+    { "title": "Momentum", "copy": "Scaled across web, mobile, and AI.", "year": "2023" },
+    { "title": "Today", "copy": "Full-service builds with measurable outcomes.", "year": "2025" }
+  ],
+  "values": [
+    { "title": "Craft", "copy": "We sweat the details.", "icon": "pen-tool" },
+    { "title": "Velocity", "copy": "Prototype fast, iterate faster.", "icon": "zap" },
+    { "title": "Clarity", "copy": "Less jargon, more results.", "icon": "target" }
+  ],
+  "team": [
+    { "name": "Aisha", "role": "Frontend Lead", "superpower": "Interaction design", "avatar": "/assets/team/aisha.jpg" },
+    { "name": "Bilal", "role": "Backend Lead", "superpower": "API design", "avatar": "/assets/team/bilal.jpg" },
+    { "name": "Zara", "role": "Full-stack", "superpower": "Fast prototyping", "avatar": "/assets/team/zara.jpg" }
+  ],
+  "tech": ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind", "Framer Motion"],
+  "whyUs": [
+    "Senior engineers, startup speed",
+    "Measurable outcomes & KPIs",
+    "Clear pricing & timelines"
+  ],
+  "cta": {
+    "title": "Kickoff in 48–72h",
+    "sub": "Let's build something amazing together.",
+    "primaryLabel": "Talk to a human",
+    "secondaryLabel": "See our work"
+  }
+}
+

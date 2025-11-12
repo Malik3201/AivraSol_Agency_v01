@@ -1,0 +1,35 @@
+[
+  {
+    "q": "How fast can you start?",
+    "a": "Within 48–72 hours after kickoff."
+  },
+  {
+    "q": "What's your timezone coverage?",
+    "a": "Async updates + overlapping hours for real-time collaboration."
+  },
+  {
+    "q": "Do you provide a warranty?",
+    "a": "30 days bug-fix support post launch included."
+  },
+  {
+    "q": "What's your pricing model?",
+    "a": "Fixed or milestone-based pricing depending on project scope."
+  },
+  {
+    "q": "Can you work with our existing team?",
+    "a": "Absolutely. We integrate seamlessly with your development workflow."
+  },
+  {
+    "q": "Do you handle ongoing maintenance?",
+    "a": "Yes, we offer monthly retainer packages for continued support."
+  },
+  {
+    "q": "What technologies do you specialize in?",
+    "a": "MERN stack, WordPress, React Native, Python/AI, and modern DevOps."
+  },
+  {
+    "q": "How do you ensure quality?",
+    "a": "Code reviews, automated testing, and thorough QA before delivery."
+  }
+]
+

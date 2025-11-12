@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "Build fast. Scale smart.",
+    "sub": "MERN, WordPress, Mobile, SEO, Python & AI — delivered by senior engineers.",
+    "primaryCta": { "label": "Get a Quote", "to": "/contact" },
+    "secondaryCta": { "label": "See Our Work", "to": "/portfolio" },
+    "collage": [
+      { "title": "AI Copilot", "kpi": "+42% task speed" },
+      { "title": "Headless WP", "kpi": "TTFB 120ms" },
+      { "title": "SaaS Dashboard", "kpi": "+64% conv" }
+    ]
+  },
+  "trust": {
+    "logos": [
+      { "name": "Acme" },
+      { "name": "Helios" },
+      { "name": "Nimbus" },
+      { "name": "Orbit" },
+      { "name": "Quantum" },
+      { "name": "Zenith" }
+    ]
+  },
+  "services": {
+    "items": [
+      { "slug": "mern", "title": "MERN Development", "benefit": "SPA to SaaS, cloud-ready", "icon": "cpu" },
+      { "slug": "wordpress", "title": "WordPress", "benefit": "Blazing-fast business sites", "icon": "layout-dashboard" },
+      { "slug": "mobile", "title": "Mobile Apps", "benefit": "React Native apps users love", "icon": "smartphone" },
+      { "slug": "seo", "title": "SEO & Growth", "benefit": "Rank higher, convert better", "icon": "sparkles" },
+      { "slug": "python", "title": "Python/Backend", "benefit": "APIs & automations", "icon": "code-2" },
+      { "slug": "ai", "title": "AI Solutions", "benefit": "Copilots & RAG", "icon": "bot" }
+    ]
+  },
+  "process": {
+    "steps": [
+      { "step": "Discover", "desc": "Goals, KPIs, scope & constraints" },
+      { "step": "Prototype", "desc": "Clickable UI, fast feedback" },
+      { "step": "Ship", "desc": "Prod-grade release & QA" },
+      { "step": "Grow", "desc": "Analytics, SEO & iterations" }
+    ]
+  },
+  "featured": {
+    "items": [
+      { "title": "SaaS Optimizer", "kpi": "+64% conversions" },
+      { "title": "Headless Commerce", "kpi": "LCP 1.3s" },
+      { "title": "AI Support Bot", "kpi": "-28% ticket load" }
+    ]
+  },
+  "capabilities": {
+    "items": ["MERN", "WordPress", "Mobile", "SEO", "Python", "AI"]
+  },
+  "testimonials": {
+    "items": [
+      { "quote": "Delivered on time with quality.", "author": "Sarah K.", "role": "PM, Helios" },
+      { "quote": "Creative, fast, and reliable.", "author": "Arman R.", "role": "Founder, Nimbus" },
+      { "quote": "Exceeded expectations on every front.", "author": "James T.", "role": "CTO, Quantum" }
+    ]
+  },
+  "faq": {
+    "items": [
+      { "q": "How fast can you start?", "a": "Within 48–72 hours after kickoff." },
+      { "q": "Timezone coverage?", "a": "Async updates + overlapping hours." },
+      { "q": "Warranty?", "a": "30 days bug-fix post launch." },
+      { "q": "Pricing model?", "a": "Fixed or milestone-based." }
+    ]
+  },
+  "cta": { 
+    "title": "Kickoff in 48–72 hours.", 
+    "sub": "Get started with a free consultation and project estimate.",
+    "primaryLabel": "Get an Estimate",
+    "secondaryLabel": "See Our Work"
+  }
+}
+

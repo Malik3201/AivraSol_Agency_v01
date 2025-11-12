@@ -1,0 +1,309 @@
+[
+  {
+    "slug": "saas-optimizer",
+    "title": "SaaS Optimizer Dashboard",
+    "summary": "Analytics platform helping SaaS companies optimize conversion funnels with real-time insights.",
+    "category": "MERN",
+    "industries": ["SaaS", "Analytics"],
+    "tech": ["React", "Node.js", "MongoDB", "Tailwind"],
+    "kpis": [
+      { "label": "Conversion Rate", "value": "+64%" },
+      { "label": "Page Load", "value": "1.2s" },
+      { "label": "User Retention", "value": "+42%" }
+    ],
+    "cover": "/assets/portfolio/saas-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/saas-1.jpg",
+      "/assets/portfolio/saas-2.jpg",
+      "/assets/portfolio/saas-3.jpg"
+    ],
+    "problem": "Legacy analytics dashboard with slow load times and complex UX preventing product teams from making data-driven decisions quickly.",
+    "solution": "Built a modern React dashboard with real-time WebSocket updates, intelligent caching, and intuitive drill-down navigation.",
+    "impact": "64% increase in conversion tracking adoption, 1.2s average load time, and 42% improvement in daily active users.",
+    "links": {
+      "live": "https://example.com/saas-optimizer"
+    },
+    "hasBeforeAfter": true
+  },
+  {
+    "slug": "headless-commerce",
+    "title": "Headless E-Commerce Platform",
+    "summary": "High-performance e-commerce built with headless WordPress and Next.js for blazing-fast shopping.",
+    "category": "WordPress",
+    "industries": ["E-commerce", "Retail"],
+    "tech": ["Headless WP", "Next.js", "Tailwind", "Stripe"],
+    "kpis": [
+      { "label": "LCP Score", "value": "1.3s" },
+      { "label": "Revenue", "value": "+38%" },
+      { "label": "Cart Abandon", "value": "-22%" }
+    ],
+    "cover": "/assets/portfolio/commerce-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/commerce-1.jpg",
+      "/assets/portfolio/commerce-2.jpg",
+      "/assets/portfolio/commerce-3.jpg",
+      "/assets/portfolio/commerce-4.jpg"
+    ],
+    "problem": "Slow traditional WordPress site with 4s+ load times causing high cart abandonment and poor mobile experience.",
+    "solution": "Migrated to headless architecture with WooCommerce backend and Next.js frontend, implementing ISR and image optimization.",
+    "impact": "1.3s LCP, 38% revenue increase, 22% reduction in cart abandonment, and 95+ Lighthouse scores.",
+    "links": {
+      "live": "https://example.com/headless-store"
+    }
+  },
+  {
+    "slug": "ai-support-bot",
+    "title": "AI Customer Support Assistant",
+    "summary": "Intelligent chatbot powered by GPT-4 reducing support ticket volume by 28% with RAG architecture.",
+    "category": "AI",
+    "industries": ["Customer Service", "SaaS"],
+    "tech": ["Python", "OpenAI", "FastAPI", "Vector DB"],
+    "kpis": [
+      { "label": "Ticket Reduction", "value": "-28%" },
+      { "label": "Response Time", "value": "<2s" },
+      { "label": "Satisfaction", "value": "4.7/5" }
+    ],
+    "cover": "/assets/portfolio/ai-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/ai-1.jpg",
+      "/assets/portfolio/ai-2.jpg",
+      "/assets/portfolio/ai-3.jpg"
+    ],
+    "problem": "Customer support team overwhelmed with repetitive questions, leading to slow response times and scaling challenges.",
+    "solution": "Built RAG-powered chatbot with company knowledge base, seamless handoff to human agents, and continuous learning.",
+    "impact": "28% reduction in ticket volume, sub-2-second response times, and 4.7/5 customer satisfaction rating.",
+    "links": {
+      "github": "https://github.com/example/ai-support"
+    }
+  },
+  {
+    "slug": "fintech-dashboard",
+    "title": "Banking Analytics Dashboard",
+    "summary": "Real-time financial analytics platform for corporate banking with advanced reporting and compliance.",
+    "category": "MERN",
+    "industries": ["Finance", "Banking"],
+    "tech": ["React", "Node.js", "PostgreSQL", "Plaid API"],
+    "kpis": [
+      { "label": "Data Accuracy", "value": "99.9%" },
+      { "label": "Report Time", "value": "3s" },
+      { "label": "Compliance", "value": "100%" }
+    ],
+    "cover": "/assets/portfolio/fintech-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/fintech-1.jpg",
+      "/assets/portfolio/fintech-2.jpg",
+      "/assets/portfolio/fintech-3.jpg",
+      "/assets/portfolio/fintech-4.jpg"
+    ],
+    "problem": "Manual financial reporting taking hours, error-prone data aggregation, and compliance audit challenges.",
+    "solution": "Automated reporting pipeline with Plaid integration, real-time data validation, and audit trail generation.",
+    "impact": "99.9% data accuracy, 3-second report generation, and 100% compliance audit pass rate.",
+    "links": {
+      "live": "https://example.com/fintech-dash"
+    },
+    "hasBeforeAfter": true
+  },
+  {
+    "slug": "fitness-mobile-app",
+    "title": "Fitness Tracking Mobile App",
+    "summary": "Cross-platform fitness app with workout plans, nutrition tracking, and social features.",
+    "category": "Mobile",
+    "industries": ["Health", "Fitness"],
+    "tech": ["React Native", "Firebase", "Node.js", "HealthKit"],
+    "kpis": [
+      { "label": "Daily Users", "value": "50K+" },
+      { "label": "Retention", "value": "68%" },
+      { "label": "Rating", "value": "4.8/5" }
+    ],
+    "cover": "/assets/portfolio/fitness-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/fitness-1.jpg",
+      "/assets/portfolio/fitness-2.jpg",
+      "/assets/portfolio/fitness-3.jpg"
+    ],
+    "problem": "Existing fitness apps too complex or lacking social features, resulting in poor user retention.",
+    "solution": "Built intuitive React Native app with gamification, friend challenges, and seamless HealthKit integration.",
+    "impact": "50K+ daily active users, 68% 30-day retention, and 4.8/5 App Store rating.",
+    "links": {
+      "live": "https://example.com/fitness-app"
+    }
+  },
+  {
+    "slug": "seo-local-business",
+    "title": "Local Business SEO Platform",
+    "summary": "SEO optimization platform helping local businesses rank higher with automated schema markup and content analysis.",
+    "category": "SEO",
+    "industries": ["Local", "Marketing"],
+    "tech": ["Next.js", "Node.js", "Schema Markup", "MongoDB"],
+    "kpis": [
+      { "label": "Organic Traffic", "value": "+156%" },
+      { "label": "Local Rank", "value": "Top 3" },
+      { "label": "Conversions", "value": "+89%" }
+    ],
+    "cover": "/assets/portfolio/seo-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/seo-1.jpg",
+      "/assets/portfolio/seo-2.jpg",
+      "/assets/portfolio/seo-3.jpg"
+    ],
+    "problem": "Local businesses struggling with Google visibility, missing structured data, and poor mobile performance.",
+    "solution": "Automated schema markup generation, mobile-first site redesign, and local SEO optimization strategy.",
+    "impact": "156% increase in organic traffic, Top 3 local rankings for key terms, and 89% more conversions.",
+    "links": {
+      "live": "https://example.com/seo-platform"
+    }
+  },
+  {
+    "slug": "real-estate-portal",
+    "title": "Real Estate Listing Portal",
+    "summary": "Modern property search platform with interactive maps, virtual tours, and AI-powered recommendations.",
+    "category": "MERN",
+    "industries": ["Real Estate"],
+    "tech": ["React", "Node.js", "MongoDB", "Mapbox"],
+    "kpis": [
+      { "label": "Listings", "value": "10K+" },
+      { "label": "Search Speed", "value": "0.8s" },
+      { "label": "Inquiries", "value": "+72%" }
+    ],
+    "cover": "/assets/portfolio/realestate-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/realestate-1.jpg",
+      "/assets/portfolio/realestate-2.jpg",
+      "/assets/portfolio/realestate-3.jpg",
+      "/assets/portfolio/realestate-4.jpg"
+    ],
+    "problem": "Outdated property search with slow filters, poor mobile UX, and no map-based discovery.",
+    "solution": "Built fast property search with Mapbox integration, instant filters, and AI-powered recommendations.",
+    "impact": "10K+ active listings, 0.8s search response, and 72% increase in property inquiries.",
+    "links": {
+      "live": "https://example.com/realestate"
+    }
+  },
+  {
+    "slug": "data-pipeline-automation",
+    "title": "Enterprise Data Pipeline",
+    "summary": "Automated ETL pipeline processing millions of records daily with real-time monitoring and alerts.",
+    "category": "Python",
+    "industries": ["Enterprise", "Analytics"],
+    "tech": ["Python", "Airflow", "Pandas", "PostgreSQL"],
+    "kpis": [
+      { "label": "Records/Day", "value": "5M+" },
+      { "label": "Uptime", "value": "99.8%" },
+      { "label": "Cost Savings", "value": "-45%" }
+    ],
+    "cover": "/assets/portfolio/pipeline-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/pipeline-1.jpg",
+      "/assets/portfolio/pipeline-2.jpg",
+      "/assets/portfolio/pipeline-3.jpg"
+    ],
+    "problem": "Manual data processing causing delays, errors, and requiring significant engineering resources.",
+    "solution": "Automated ETL pipeline with Airflow orchestration, error handling, and real-time monitoring dashboards.",
+    "impact": "5M+ records processed daily, 99.8% uptime, and 45% reduction in operational costs.",
+    "links": {
+      "github": "https://github.com/example/data-pipeline"
+    }
+  },
+  {
+    "slug": "healthcare-portal",
+    "title": "Patient Portal Platform",
+    "summary": "HIPAA-compliant patient portal with appointment scheduling, telemedicine, and secure messaging.",
+    "category": "MERN",
+    "industries": ["Healthcare"],
+    "tech": ["React", "Node.js", "MongoDB", "Twilio"],
+    "kpis": [
+      { "label": "Appointments", "value": "2K+/mo" },
+      { "label": "No-shows", "value": "-34%" },
+      { "label": "Satisfaction", "value": "4.6/5" }
+    ],
+    "cover": "/assets/portfolio/healthcare-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/healthcare-1.jpg",
+      "/assets/portfolio/healthcare-2.jpg",
+      "/assets/portfolio/healthcare-3.jpg"
+    ],
+    "problem": "Phone-based scheduling causing high no-show rates, poor patient communication, and administrative burden.",
+    "solution": "Built HIPAA-compliant portal with online scheduling, SMS reminders, and secure video consultations.",
+    "impact": "2K+ monthly appointments, 34% reduction in no-shows, and 4.6/5 patient satisfaction.",
+    "links": {
+      "live": "https://example.com/healthcare"
+    }
+  },
+  {
+    "slug": "ml-recommendation-engine",
+    "title": "ML Recommendation Engine",
+    "summary": "Machine learning recommendation system improving product discovery and increasing average order value.",
+    "category": "AI",
+    "industries": ["E-commerce", "ML"],
+    "tech": ["Python", "TensorFlow", "FastAPI", "Redis"],
+    "kpis": [
+      { "label": "Click-through", "value": "+48%" },
+      { "label": "AOV", "value": "+31%" },
+      { "label": "Response", "value": "<100ms" }
+    ],
+    "cover": "/assets/portfolio/ml-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/ml-1.jpg",
+      "/assets/portfolio/ml-2.jpg",
+      "/assets/portfolio/ml-3.jpg"
+    ],
+    "problem": "Generic product recommendations resulting in low engagement and missed cross-sell opportunities.",
+    "solution": "Trained collaborative filtering model with real-time inference, A/B testing, and continuous learning.",
+    "impact": "48% higher click-through rate, 31% increase in AOV, and sub-100ms recommendation latency.",
+    "links": {
+      "github": "https://github.com/example/ml-recommender"
+    }
+  },
+  {
+    "slug": "wordpress-multisite",
+    "title": "Enterprise WordPress Multisite",
+    "summary": "Scalable WordPress multisite network serving 50+ brands with centralized management and SSO.",
+    "category": "WordPress",
+    "industries": ["Enterprise", "Marketing"],
+    "tech": ["Headless WP", "ACF", "Redis", "WebSockets"],
+    "kpis": [
+      { "label": "Sites", "value": "50+" },
+      { "label": "Uptime", "value": "99.9%" },
+      { "label": "Admin Time", "value": "-60%" }
+    ],
+    "cover": "/assets/portfolio/multisite-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/multisite-1.jpg",
+      "/assets/portfolio/multisite-2.jpg",
+      "/assets/portfolio/multisite-3.jpg"
+    ],
+    "problem": "Managing 50+ separate WordPress instances causing security risks, update delays, and admin overhead.",
+    "solution": "Consolidated to multisite network with SSO, automated updates, centralized asset management, and Redis caching.",
+    "impact": "50+ sites managed centrally, 99.9% uptime, and 60% reduction in administrative time.",
+    "links": {
+      "live": "https://example.com/multisite"
+    }
+  },
+  {
+    "slug": "mobile-food-delivery",
+    "title": "Food Delivery Mobile App",
+    "summary": "Fast and reliable food delivery app with real-time tracking and seamless payment integration.",
+    "category": "Mobile",
+    "industries": ["E-commerce", "Local"],
+    "tech": ["React Native", "Firebase", "Node.js", "Stripe", "Mapbox"],
+    "kpis": [
+      { "label": "Orders/Day", "value": "3K+" },
+      { "label": "Delivery Time", "value": "28min" },
+      { "label": "Rating", "value": "4.7/5" }
+    ],
+    "cover": "/assets/portfolio/fooddelivery-cover.jpg",
+    "gallery": [
+      "/assets/portfolio/fooddelivery-1.jpg",
+      "/assets/portfolio/fooddelivery-2.jpg",
+      "/assets/portfolio/fooddelivery-3.jpg",
+      "/assets/portfolio/fooddelivery-4.jpg"
+    ],
+    "problem": "Existing delivery app with poor tracking, slow checkout, and unreliable driver assignment.",
+    "solution": "Built fast React Native app with real-time GPS tracking, one-tap checkout, and intelligent driver routing.",
+    "impact": "3K+ daily orders, 28-minute average delivery time, and 4.7/5 customer rating.",
+    "links": {
+      "live": "https://example.com/food-delivery"
+    },
+    "hasBeforeAfter": true
+  }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "slug": "mern",
+    "title": "MERN Development",
+    "benefit": "SPA to SaaS, cloud-ready & testable",
+    "icon": "cpu",
+    "tools": ["React", "Node.js", "MongoDB", "Vite"],
+    "pricingBands": ["S: $1.5k–$3k", "M: $3k–$6k", "L: $6k+"],
+    "examples": [
+      { "title": "SaaS Optimizer", "kpi": "+64% conversions", "thumb": "/assets/portfolio/saas-cover.jpg", "to": "/portfolio/saas-optimizer" },
+      { "title": "Ops Dashboard", "kpi": "TTI 1.6s", "thumb": "/assets/portfolio/ops-cover.jpg", "to": "/portfolio/ops-dashboard" }
+    ],
+    "faqs": [
+      { "q": "Typical timeline?", "a": "2–6 weeks depending on scope." },
+      { "q": "Tech stack?", "a": "React, Node, MongoDB, Tailwind." }
+    ],
+    "overview": [
+      "Scalable frontends, typed APIs, and CI-friendly architecture.",
+      "Performance budget & accessibility baked-in."
+    ]
+  },
+  {
+    "slug": "wordpress",
+    "title": "WordPress",
+    "benefit": "Blazing-fast business sites",
+    "icon": "layout-dashboard",
+    "tools": ["WP", "Headless WP", "VitePress"],
+    "pricingBands": ["S: $800–$1.5k", "M: $1.5k–$3k", "L: $3k+"],
+    "examples": [
+      { "title": "Headless WP Store", "kpi": "LCP 1.2s", "thumb": "/assets/portfolio/commerce-cover.jpg", "to": "/portfolio/headless-commerce" }
+    ],
+    "faqs": [
+      { "q": "Hosting?", "a": "Client or recommended managed WP host." }
+    ],
+    "overview": [
+      "Fast, secure, SEO-ready themes.",
+      "Optionally headless with React frontends."
+    ]
+  },
+  {
+    "slug": "mobile",
+    "title": "Mobile Apps",
+    "benefit": "React Native apps users love",
+    "icon": "smartphone",
+    "tools": ["React Native", "Expo"],
+    "pricingBands": ["S: $2k–$4k", "M: $4k–$8k", "L: $8k+"],
+    "examples": [],
+    "faqs": [],
+    "overview": ["Cross-platform, fast time-to-market."]
+  },
+  {
+    "slug": "seo",
+    "title": "SEO & Growth",
+    "benefit": "Rank higher, convert better",
+    "icon": "sparkles",
+    "tools": ["GA4", "Plausible", "On-page SEO"],
+    "pricingBands": ["S: $400–$900", "M: $900–$1.8k", "L: $1.8k+"],
+    "examples": [],
+    "faqs": [],
+    "overview": ["Technical SEO, content strategy, analytics."]
+  },
+  {
+    "slug": "python",
+    "title": "Python/Backend",
+    "benefit": "APIs & automations",
+    "icon": "code-2",
+    "tools": ["FastAPI", "Celery", "Pandas"],
+    "pricingBands": ["S: $800–$1.5k", "M: $1.5k–$3k", "L: $3k+"],
+    "examples": [],
+    "faqs": [],
+    "overview": ["Data pipelines & integrations."]
+  },
+  {
+    "slug": "ai",
+    "title": "AI Solutions",
+    "benefit": "Copilots & RAG",
+    "icon": "bot",
+    "tools": ["OpenAI", "Vector DB", "RAG"],
+    "pricingBands": ["S: $1k–$2k", "M: $2k–$4k", "L: $4k+"],
+    "examples": [],
+    "faqs": [],
+    "overview": ["Assistants, retrieval, actionable insights."]
+  }
+]
+
