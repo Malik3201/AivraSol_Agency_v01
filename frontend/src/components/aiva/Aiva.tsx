@@ -4,83 +4,7 @@ import { X, Send, Bot, Loader2, Sparkles } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { cn } from '@/lib/cn'
-import { getServices, getProjects, getTestimonials, getKnowledge, getCategories } from '@/api/client'
-import type { ServiceDto, ProjectDto, TestimonialDto, KnowledgeDto } from '@/api/schemas'
-
-const GEMINI_API_KEY = 'AIzaSyCOC369SvktPO-3_5ZbKP7pBMEobvkaDe0'
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'
-
-class RateLimitError extends Error {
-  constructor(message = 'Rate limit exceeded') {
-    super(message)
-    this.name = 'RateLimitError'
-  }
-}
-
-const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
-
-let lastGeminiRequestTime = 0
-
-async function requestGemini(payload: unknown, retries = 3): Promise<any> {
-  let attempt = 0
-  let delay = 1000
-
-  while (attempt <= retries) {
-    try {
-      const now = Date.now()
-      const elapsed = now - lastGeminiRequestTime
-      if (elapsed < 1200) {
-        await sleep(1200 - elapsed)
-      }
-
-      const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-
-      lastGeminiRequestTime = Date.now()
-
-      if (response.status === 429) {
-        if (attempt < retries) {
-          await sleep(delay)
-          attempt += 1
-          delay *= 2
-          continue
-        }
-        throw new RateLimitError()
-      }
-
-      if (!response.ok) {
-        const errorText = await response.text().catch(() => '')
-        throw new Error(errorText || 'Failed to get response from Gemini')
-      }
-
-      return (await response.json()) as any
-    } catch (error) {
-      if (error instanceof RateLimitError) {
-        throw error
-      }
-
-      if (attempt < retries) {
-        await sleep(delay)
-        attempt += 1
-        delay *= 2
-        continue
-      }
-
-      if (error instanceof Error) {
-        throw error
-      }
-
-      throw new Error('Network error')
-    }
-  }
-
-  throw new Error('Failed to get response from Gemini')
-}
+import { API_BASE } from '@/lib/config'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -88,12 +12,42 @@ interface Message {
   timestamp: Date
 }
 
-interface SiteData {
-  services: ServiceDto[]
-  projects: ProjectDto[]
-  testimonials: TestimonialDto[]
-  faqs: KnowledgeDto[]
-  techStacks: string[]
+/**
+ * Call backend AI assistant endpoint
+ */
+async function sendToAI(messages: Message[]): Promise<string> {
+  try {
+    const response = await fetch(`${API_BASE}/aiva/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: messages.map(m => ({
+          role: m.role,
+          content: m.content,
+        })),
+      }),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.error || 'Failed to get AI response')
+    }
+
+    const data = await response.json()
+    
+    if (data.success && data.content) {
+      return data.content
+    }
+    
+    // Fallback if response format is unexpected
+    return data.content || "I apologize, but I couldn't process that request. Please try again."
+    
+  } catch (error) {
+    console.error('AI Backend Error:', error)
+    throw error
+  }
 }
 
 export function Aiva() {
@@ -101,43 +55,8 @@ export function Aiva() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [siteData, setSiteData] = useState<SiteData>({
-    services: [],
-    projects: [],
-    testimonials: [],
-    faqs: [],
-    techStacks: [],
-  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  // Fetch and cache site data on mount
-  useEffect(() => {
-    const loadSiteData = async () => {
-      try {
-        const [servicesRes, projectsRes, testimonialsRes, faqsRes, techStacksRes] = await Promise.all([
-          getServices(),
-          getProjects(),
-          getTestimonials(),
-          getKnowledge(),
-          getCategories({ type: 'tech' }),
-        ])
-
-        setSiteData({
-          services: servicesRes.data || [],
-          projects: projectsRes.data || [],
-          testimonials: testimonialsRes.data || [],
-          faqs: faqsRes.data || [],
-          techStacks: techStacksRes.data?.map((t: { title: string }) => t.title) || [],
-        })
-      } catch (error) {
-        console.error('Failed to load site data:', error)
-        // Still allow chat even if data fails
-      }
-    }
-
-    loadSiteData()
-  }, [])
 
   // Initialize with greeting when chat opens
   useEffect(() => {
@@ -145,7 +64,7 @@ export function Aiva() {
       setMessages([
         {
           role: 'assistant',
-          content: '👋 Hi there! I\'m **Aiva** — your AI guide at AivraSol. How can I help you today?',
+          content: '👋 Hi there! I\'m **Aiva** — your AI guide at AivraSol. How can I help you today?\n\nYou can ask me about:\n• Our services and expertise\n• Portfolio and past projects\n• Technologies we use\n• Getting a quote or consultation',
           timestamp: new Date(),
         },
       ])
@@ -164,112 +83,9 @@ export function Aiva() {
     }
   }, [isOpen])
 
-  const getFallbackResponse = (userQuery: string): string => {
-    const query = userQuery.toLowerCase()
-
-    // Services related
-    if (query.match(/\b(service|what do you|what can|offer|provide)\b/)) {
-      const servicesList = siteData.services
-        .slice(0, 5)
-        .map((s) => `• **${s.title}**: ${s.summary || s.description}`)
-        .join('\n')
-      return `Great question! AivraSol specializes in professional web, AI, and software development. Here are some of our key services:\n\n${servicesList || 'Our services include web development, AI solutions, and custom software.'}\n\nWould you like to know more about any specific service?`
-    }
-
-    // Projects/Portfolio
-    if (query.match(/\b(project|portfolio|work|built|example|case study)\b/)) {
-      const projectsList = siteData.projects
-        .slice(0, 3)
-        .map((p) => `• **${p.title}**: ${p.summary}`)
-        .join('\n')
-      return `We've worked on some amazing projects! Here are a few highlights:\n\n${projectsList || 'We have an impressive portfolio of web, AI, and software projects.'}\n\nWould you like to explore our full portfolio?`
-    }
-
-    // Website request
-    if (query.match(/\b(website|web app|site|landing page|web development)\b/)) {
-      const webProjects = siteData.projects.filter(p => 
-        p.title.toLowerCase().includes('web') || p.summary.toLowerCase().includes('web')
-      ).slice(0, 2)
-      const examples = webProjects.length > 0 
-        ? `\n\nHere are some websites we've built:\n${webProjects.map(p => `• ${p.title}`).join('\n')}`
-        : ''
-      return `I'd love to help you with your website project! AivraSol builds modern, responsive websites tailored to your needs.${examples}\n\nWould you like me to connect you with our team for a free consultation?`
-    }
-
-    // AI related
-    if (query.match(/\b(ai|artificial intelligence|machine learning|ml|chatbot)\b/)) {
-      return `AivraSol specializes in AI solutions! We build intelligent systems including chatbots, machine learning models, and AI-powered applications.\n\nWe use cutting-edge technologies to solve real-world problems. Would you like to discuss an AI project with our team?`
-    }
-
-    // Contact/pricing
-    if (query.match(/\b(contact|reach|email|phone|call|price|cost|quote|budget)\b/)) {
-      return `I'd be happy to connect you with our team! You can reach us through our contact form, and we'll get back to you promptly.\n\nWe offer free consultations and custom quotes based on your project needs. Would you like me to guide you to our contact page?`
-    }
-
-    // Tech stack
-    if (query.match(/\b(tech|technology|stack|tools|framework|language)\b/)) {
-      const techList = siteData.techStacks.slice(0, 15).join(', ')
-      return `We work with modern, industry-leading technologies including:\n\n${techList || 'React, Node.js, Python, AI/ML frameworks, and more'}\n\nWe choose the best tech stack for each project. What kind of technology are you interested in?`
-    }
-
-    // Generic/greeting
-    if (query.match(/\b(hi|hello|hey|help|assist)\b/)) {
-      return `Hello! 👋 I'm here to help you learn about AivraSol's services, projects, and expertise.\n\nYou can ask me about:\n• Our services and offerings\n• Portfolio and past projects\n• Technologies we use\n• Getting a quote or contacting the team\n\nWhat would you like to know?`
-    }
-
-    // Default fallback
-    return `That's a great question! While I'm here to help you explore AivraSol's services and capabilities, I'd love to know more about what you're looking for.\n\nAre you interested in:\n• Building a website or web app?\n• AI/ML solutions?\n• Custom software development?\n• Viewing our portfolio?\n\nOr would you like me to connect you with our team directly?`
-  }
-
-  const buildContextPrompt = (): string => {
-    const servicesList = siteData.services
-      .slice(0, 10)
-      .map((s) => `- ${s.title}: ${s.summary || s.description}`)
-      .join('\n')
-
-    const projectsList = siteData.projects
-      .slice(0, 10)
-      .map((p) => `- ${p.title}: ${p.summary}`)
-      .join('\n')
-
-    const techList = siteData.techStacks.slice(0, 20).join(', ')
-
-    return `You are Aiva, the official AI assistant of AivraSol — a professional web, AI, and software agency.
-
-You are friendly, intelligent, confident, and brand-aligned. You talk like a human brand representative — not robotic.
-
-**Company Information:**
-- AivraSol is a professional web, AI, and software development agency
-- We specialize in web development, AI solutions, and custom software
-
-**Available Services:**
-${servicesList || 'Services data not available yet'}
-
-**Portfolio Projects:**
-${projectsList || 'Projects data not available yet'}
-
-**Tech Stacks We Use:**
-${techList || 'Tech stacks data not available yet'}
-
-**Your Role:**
-- Guide users about company services, portfolio, tech stacks, and processes
-- If user says "I want a website", suggest relevant projects from portfolio
-- If user says "I want to contact", mention they can use the contact form
-- If user says "I want AI project", suggest AivraSol's AI services
-- Always end with a helpful next step like "Would you like me to connect you with our team?" or "Here's a similar project we built..."
-- If you don't have specific information, say: "I don't have that info yet, but I'll confirm with our development team."
-- Keep responses simple, warm, and professional
-- Don't invent facts about AivraSol
-- If asked about unrelated topics, politely redirect: "That's an interesting question! My main focus is helping you explore AivraSol's services — would you like to see what we offer?"
-
-**Current Conversation:**
-${messages
-  .map((m) => `${m.role === 'user' ? 'User' : 'Aiva'}: ${m.content}`)
-  .join('\n')}
-
-Now respond as Aiva to the user's latest message. Keep it conversational and helpful.`
-  }
-
+  /**
+   * Send message to AI assistant via backend
+   */
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return
 
@@ -279,47 +95,29 @@ Now respond as Aiva to the user's latest message. Keep it conversational and hel
       timestamp: new Date(),
     }
 
+    // Add user message to chat
     setMessages((prev) => [...prev, userMessage])
     setInput('')
     setIsLoading(true)
 
     try {
-      const contextPrompt = buildContextPrompt()
-      const userQuery = userMessage.content
-
-      const payload = {
-        contents: [
-          {
-            parts: [
-              {
-                text: `${contextPrompt}\n\nUser: ${userQuery}\n\nAiva:`,
-              },
-            ],
-          },
-        ],
-      }
-
-      const data = await requestGemini(payload)
-      const assistantContent =
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "I'm having trouble processing that right now. Could you try rephrasing your question?"
+      // Call backend AI endpoint with conversation history
+      const aiResponse = await sendToAI([...messages, userMessage])
 
       const assistantMessage: Message = {
         role: 'assistant',
-        content: assistantContent,
+        content: aiResponse,
         timestamp: new Date(),
       }
 
       setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Error sending message:', error)
+      console.error('Error communicating with AI:', error)
       
-      // Use fallback response when Gemini is unavailable
-      const fallbackContent = getFallbackResponse(userMessage.content)
-      
+      // Fallback error message
       const errorMessage: Message = {
         role: 'assistant',
-        content: fallbackContent,
+        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment, or feel free to explore our services and portfolio directly on the website. You can also reach out to our team through the contact form!",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
