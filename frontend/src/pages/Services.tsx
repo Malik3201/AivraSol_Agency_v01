@@ -23,27 +23,24 @@ const ctaData = {
 export function Services() {
   const { data: services, loading, error } = useServices()
 
-  if (loading) {
-    return (
-      <div className="py-20">
-        <Container>
-          <SkeletonGrid rows={2} cols={3} />
-        </Container>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <ContentError error={error} onRetry={() => window.location.reload()} />
-      </Container>
-    )
-  }
-
   return (
     <>
-      <ServicesGrid services={services} />
+      {/* Services Grid with loading state */}
+      {loading ? (
+        <section className="py-20">
+          <Container>
+            <SkeletonGrid rows={2} cols={3} />
+          </Container>
+        </section>
+      ) : error ? (
+        <section className="py-20">
+          <Container>
+            <ContentError error={error} onRetry={() => window.location.reload()} />
+          </Container>
+        </section>
+      ) : (
+        <ServicesGrid services={services} />
+      )}
       
       <ProcessTimeline steps={processSteps} />
       
@@ -51,3 +48,4 @@ export function Services() {
     </>
   )
 }
+

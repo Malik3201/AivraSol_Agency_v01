@@ -73,24 +73,6 @@ export function Portfolio() {
     window.plausible?.('portfolio_load_more', { props: { current_count: visibleProjects.length } })
   }
 
-  if (loading) {
-    return (
-      <div className="py-20">
-        <Container>
-          <SkeletonGrid rows={4} cols={3} />
-        </Container>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <ContentError error={error} onRetry={() => window.location.reload()} />
-      </Container>
-    )
-  }
-
   const selectedIndustries = Array.from(filters.industries)
   const selectedTech = Array.from(filters.tech)
 
@@ -186,7 +168,11 @@ export function Portfolio() {
       {/* Grid */}
       <section className="py-12 min-h-screen">
         <Container>
-          {visibleProjects.length === 0 ? (
+          {loading ? (
+            <SkeletonGrid rows={4} cols={3} />
+          ) : error ? (
+            <ContentError error={error} onRetry={() => window.location.reload()} />
+          ) : visibleProjects.length === 0 ? (
             <motion.div {...fadeInUp} className="text-center py-20">
               <div className="text-text-muted mb-4">No projects found</div>
               <Button variant="ghost" onClick={handleClearAll}>
