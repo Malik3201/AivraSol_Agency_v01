@@ -8,9 +8,15 @@ import { Testimonial } from "../models/testimonials.js";
 
 const aivaRouter = express.Router();
 
-// Secure API configuration - never exposed to frontend
-const LONGCAT_API_URL = "https://api.longcat.chat/openai/v1/chat/completions";
-const LONGCAT_API_KEY = "ak_1S782S7qr2W74HD8HH7DJ9td2sK9m";
+// Secure API configuration from environment variables
+const LONGCAT_API_URL = process.env.LONGCAT_API_URL || "https://api.longcat.chat/openai/v1/chat/completions";
+const LONGCAT_API_KEY = process.env.LONGCAT_API_KEY;
+const LONGCAT_MODEL = process.env.LONGCAT_MODEL || "LongCat-Flash-Chat";
+
+// Validate required environment variables
+if (!LONGCAT_API_KEY) {
+  console.error("❌ LONGCAT_API_KEY is not set in environment variables");
+}
 
 /**
  * Fetch all website data from MongoDB
@@ -164,7 +170,7 @@ aivaRouter.post("/chat", async (req, res) => {
         "Authorization": `Bearer ${LONGCAT_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "LongCat-Flash-Chat",
+        model: LONGCAT_MODEL,
         messages: formattedMessages,
         temperature: 0.8,
         max_tokens: 300,
