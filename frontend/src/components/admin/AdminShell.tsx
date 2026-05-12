@@ -12,6 +12,8 @@ import {
   X,
   User,
   Activity,
+  Link2,
+  Star,
 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
@@ -25,6 +27,8 @@ const navItems = [
   { to: '/admin/knowledge', label: 'FAQs', icon: BookOpen },
   { to: '/admin/testimonials', label: 'Testimonials', icon: Inbox },
   { to: '/admin/techstack', label: 'Tech Stack', icon: Tag },
+  { to: '/admin/review-links', label: 'Review Links', icon: Link2 },
+  { to: '/admin/reviews', label: 'Reviews', icon: Star },
 ]
 
 const toolsItems = [

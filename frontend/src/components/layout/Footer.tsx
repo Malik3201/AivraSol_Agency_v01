@@ -14,7 +14,10 @@ const footerSections = {
     { name: "Cloud Solutions", href: "/services" },
     { name: "AI Integration", href: "/services" },
   ],
-  resources: [{ name: "Case Studies", href: "/portfolio" }],
+  resources: [
+    { name: "Case Studies", href: "/portfolio" },
+    { name: "Client Reviews", href: "/reviews" },
+  ],
   social: [
     { name: "GitHub", href: "#", icon: Github },
     { name: "LinkedIn", href: "#", icon: Linkedin },

@@ -12,6 +12,8 @@ import { ServiceDetail } from '@/pages/ServiceDetail'
 import { Portfolio } from '@/pages/Portfolio'
 import { ProjectDetail } from '@/pages/ProjectDetail'
 import { Contact } from '@/pages/Contact'
+import { Reviews as PublicReviews } from '@/pages/Reviews'
+import { ReviewSubmit } from '@/pages/ReviewSubmit'
 import { Login } from '@/pages/admin/Login'
 import { AdminShell } from '@/components/admin/AdminShell'
 import { RouteGuard } from '@/components/admin/RouteGuard'
@@ -22,6 +24,8 @@ import { Knowledge } from '@/pages/admin/Knowledge'
 import { ToolsChecks } from '@/pages/admin/ToolsChecks'
 import { Testimonials } from '@/pages/admin/Testimonials'
 import { TechStacks } from '@/pages/admin/TechStacks'
+import { ReviewLinks } from '@/pages/admin/ReviewLinks'
+import { AdminReviews } from '@/pages/admin/Reviews'
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -98,6 +102,22 @@ export function AppRoutes() {
           </PublicLayout>
         }
       />
+      <Route
+        path="/reviews"
+        element={
+          <PublicLayout>
+            <PublicReviews />
+          </PublicLayout>
+        }
+      />
+      <Route
+        path="/review/:token"
+        element={
+          <PublicLayout>
+            <ReviewSubmit />
+          </PublicLayout>
+        }
+      />
       <Route path="/admin/login" element={<Login />} />
       <Route
         path="/admin"
@@ -113,6 +133,8 @@ export function AppRoutes() {
         <Route path="knowledge" element={<Knowledge />} />
         <Route path="testimonials" element={<Testimonials />} />
         <Route path="techstack" element={<TechStacks />} />
+        <Route path="review-links" element={<ReviewLinks />} />
+        <Route path="reviews" element={<AdminReviews />} />
         <Route path="tools/checks" element={<ToolsChecks />} />
       </Route>
     </Routes>

@@ -24,3 +24,6 @@ Thumbs.db
 
 # Optional: Render temp files
 *.local
+
+# Uploaded review media
+backend/uploads/

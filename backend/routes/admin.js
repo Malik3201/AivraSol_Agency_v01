@@ -15,6 +15,20 @@ import {
 import { addFaq, deleteFaq, editFaq, getFaqs} from "../controllers/faqs.js";
 import { addTestimonial, deleteTestimonial, editTestimonial, getTestimonials } from "../controllers/testimonials.js";
 import { addTechStack, deleteTechStack, editTechStack, getTechStacks } from "../controllers/techStack.js";
+import {
+  createReviewLink,
+  deleteReviewLink,
+  listReviewLinks,
+} from "../controllers/reviewLinks.js";
+import {
+  approveReview,
+  deleteAdminReview,
+  getAdminReview,
+  listAdminReviews,
+  rejectReview,
+  updateAdminReview,
+} from "../controllers/reviews.js";
+import { verifyAdmin } from "../middleware/verifyAdmin.js";
 const adminRouter = express.Router();
 
 //Admin Auth
@@ -51,5 +65,17 @@ adminRouter.post("/techStack-add",addTechStack)
 adminRouter.put("/techStack-edit/:id",editTechStack)
 adminRouter.delete("/techStack-delete/:id",deleteTechStack)
 
+// admin review links (protected with JWT verifyAdmin middleware)
+adminRouter.get("/review-links", verifyAdmin, listReviewLinks);
+adminRouter.post("/review-links", verifyAdmin, createReviewLink);
+adminRouter.delete("/review-links/:id", verifyAdmin, deleteReviewLink);
+
+// admin reviews
+adminRouter.get("/reviews", verifyAdmin, listAdminReviews);
+adminRouter.get("/reviews/:id", verifyAdmin, getAdminReview);
+adminRouter.patch("/reviews/:id/approve", verifyAdmin, approveReview);
+adminRouter.patch("/reviews/:id/reject", verifyAdmin, rejectReview);
+adminRouter.patch("/reviews/:id", verifyAdmin, updateAdminReview);
+adminRouter.delete("/reviews/:id", verifyAdmin, deleteAdminReview);
 
 export default adminRouter;
