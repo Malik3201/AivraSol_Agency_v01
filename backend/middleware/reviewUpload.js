@@ -1,13 +1,7 @@
 import multer from "multer";
 import path from "path";
-import fs from "fs";
 import crypto from "crypto";
-
-const UPLOAD_ROOT = path.resolve(process.cwd(), "uploads", "reviews");
-
-if (!fs.existsSync(UPLOAD_ROOT)) {
-  fs.mkdirSync(UPLOAD_ROOT, { recursive: true });
-}
+import { getReviewsUploadDir } from "../config/uploads.js";
 
 // Whitelisted file kinds. Keep MIME + extension in sync — we validate both.
 const IMAGE_EXT = ["jpg", "jpeg", "png", "webp", "gif"];
@@ -65,7 +59,15 @@ function categorize(ext) {
 }
 
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOAD_ROOT),
+  // Resolve the destination lazily so the directory is only created on first
+  // upload — safe in read-only serverless module loaders.
+  destination: (_req, _file, cb) => {
+    try {
+      cb(null, getReviewsUploadDir());
+    } catch (err) {
+      cb(err, "");
+    }
+  },
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     const stamp = Date.now().toString(36);
@@ -111,4 +113,4 @@ export function validateReviewFiles(files) {
   return null;
 }
 
-export { UPLOAD_ROOT, categorize };
+export { categorize };

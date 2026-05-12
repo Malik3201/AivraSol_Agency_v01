@@ -2,9 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import path from "path";
-import fs from "fs";
 import { connectDb } from "./config/db.js";
+import { getUploadsRoot } from "./config/uploads.js";
 import adminRouter from "./routes/admin.js";
 import userRouter from "./routes/user.js";
 import aivaRouter from "./routes/aiva.js";
@@ -49,14 +48,17 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Serve uploaded review media as static files. The uploads/ folder lives at the
-// project root next to package.json. We create it eagerly so the static handler
-// never errors out on cold start.
-const uploadsRoot = path.resolve(process.cwd(), "uploads");
-if (!fs.existsSync(uploadsRoot)) {
-  fs.mkdirSync(uploadsRoot, { recursive: true });
+// Serve uploaded review media as static files. The uploads root is resolved
+// lazily (and falls back to the OS temp dir on read-only serverless FS), so
+// the static handler never crashes module load.
+try {
+  app.use(
+    "/uploads",
+    express.static(getUploadsRoot(), { fallthrough: true })
+  );
+} catch (err) {
+  console.warn("Static /uploads handler not mounted:", err?.message);
 }
-app.use("/uploads", express.static(uploadsRoot, { fallthrough: true }));
 
 app.use("/aiva", aivaRouter);
 

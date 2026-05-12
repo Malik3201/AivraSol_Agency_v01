@@ -7,6 +7,7 @@ import {
   validateReviewFiles,
   MAX_FILES,
 } from "../middleware/reviewUpload.js";
+import { getReviewsUploadDir } from "../config/uploads.js";
 
 const ALLOWED_SERVICE_CATEGORIES = new Set([
   "Website Development",
@@ -434,15 +435,10 @@ export async function deleteAdminReview(req, res) {
         .status(404)
         .json({ success: false, message: "Review not found" });
 
+    const reviewsDir = getReviewsUploadDir();
     for (const media of review.media_files || []) {
       if (!media?.filename) continue;
-      const abs = path.resolve(
-        process.cwd(),
-        "uploads",
-        "reviews",
-        media.filename
-      );
-      unlinkSafe(abs);
+      unlinkSafe(path.join(reviewsDir, media.filename));
     }
 
     await Review.deleteOne({ _id: id });
