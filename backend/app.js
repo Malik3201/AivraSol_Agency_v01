@@ -25,7 +25,11 @@ const developmentOrigins = [
   "http://127.0.0.1:5173",
   "http://127.0.0.1:3000",
 ];
-const productionOrigins = ["https://aivrasol.netlify.app"];
+const productionOrigins = [
+  "https://aivrasol.netlify.app",
+  "https://aivrasol.com",
+  "https://www.aivrasol.com",
+];
 
 const allAllowedOrigins = [...developmentOrigins, ...productionOrigins];
 
